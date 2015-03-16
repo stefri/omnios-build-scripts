@@ -1,4 +1,4 @@
 # Package server URL and publisher
 PKGPUBLISHER=uulm.mawi
-PKGSRVR=/pkg/repos/release
+PKGSRVR=http://localhost:10000
 
