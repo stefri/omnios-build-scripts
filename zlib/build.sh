@@ -33,7 +33,7 @@ PKG=local/library/zlib
 SUMMARY="$PROG - A massively spiffy yet delicately unobtrusive compression library"
 DESC="$SUMMARY ($VER)"
 
-DEPENDS_IPS="system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime"
 
 CONFIGURE_OPTS_32="--prefix=$PREFIX
     --includedir=$PREFIX/include

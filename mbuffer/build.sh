@@ -34,7 +34,7 @@ SUMMARY="$PROG - measuring buffer"
 DESC="mbuffer is a tool for buffering data streams."
 
 BUILDARCH=64
-DEPENDS_IPS="library/mhash"
+RUN_DEPENDS_IPS="library/mhash"
 export VERSION=$VER
 
 init

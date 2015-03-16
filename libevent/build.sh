@@ -34,7 +34,7 @@ PKG=library/libevent
 SUMMARY="$PROG - an event notification library"
 DESC="The libevent API provides a mechanism to execute a callback function when a specific event occurs on a file descriptor or after a timeout has been reached. Furthermore, libevent also support callbacks due to signals or regular timeouts."
 
-DEPENDS_IPS="system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime"
 
 BUILDDIR="$PROG-$VER-stable"
 CONFIGURE_OPTS="--disable-static"

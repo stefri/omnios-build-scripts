@@ -41,7 +41,7 @@ export LDFLAGS="-L$PYTHONLIB -R$PYTHONLIB -L/usr/local/lib/$ISAPART64 -R/usr/loc
 PYTHON=/opt/python27/bin/python
 PATH=/usr/local/bin:/opt/python27/bin:$PATH
 
-DEPENDS_IPS="runtime/python-27 library/python-27/async library/python-27/smmap"
+RUN_DEPENDS_IPS="runtime/python-27 library/python-27/async library/python-27/smmap"
 BUILD_DEPENDS_IPS="$DEPENDS_IPS library/python-27/setuptools"
 
 init

@@ -35,7 +35,7 @@ SUMMARY="A filesystem backup utility based on rsync."
 DESC="$SUMMARY ($VER)"
 
 BUILD_DEPENDS_IPS="system/library/gcc-4-runtime network/rsync"
-DEPENDS_IPS="network/rsync library/lchown"
+RUN_DEPENDS_IPS="network/rsync library/lchown"
 BUILDARCH=32
 CONFIGURE_OPTS="--sysconfdir=/etc/rsnapshot"
 

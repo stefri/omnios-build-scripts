@@ -35,7 +35,7 @@ SUMMARY="OpenLDAP - Tools and Libraries"
 DESC="$SUMMARY ($VER)"
 
 BUILD_DEPENDS_IPS="developer/build/libtool library/libtool/libltdl"
-DEPENDS_IPS="system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime"
 
 CONFIGURE_OPTS="--sysconfdir=/etc
     --disable-slapd

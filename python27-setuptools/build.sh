@@ -34,7 +34,7 @@ PKG=library/python-27/setuptools
 SUMMARY="Easily download, build, install, upgrade, and uninstall Python packages"
 DESC="Setuptools is a fully-featured, actively-maintained, and stable library designed to facilitate packaging Python projects"
 
-DEPENDS_IPS="runtime/python-27"
+RUN_DEPENDS_IPS="runtime/python-27"
 BUILD_DEPENDS_IPS="runtime/python-27"
 
 # uulm.mawi python is 64-bit only

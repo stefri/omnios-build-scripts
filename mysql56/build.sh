@@ -33,7 +33,7 @@ VER=5.6.22
 VERHUMAN=$VER
 
 BUILD_DEPENDS_IPS="developer/build/cmake system/library/g++-4-runtime system/library/gcc-4-runtime"
-DEPENDS_IPS="system/library/g++-4-runtime system/library/gcc-4-runtime library/security/openssl"
+RUN_DEPENDS_IPS="system/library/g++-4-runtime system/library/gcc-4-runtime library/security/openssl"
 NO_PARALLEL_MAKE=1
 
 

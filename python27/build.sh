@@ -34,7 +34,7 @@ PKG=runtime/python-27
 SUMMARY="$PROG - An Interpreted, Interactive, Object-oriented, Extensible Programming Language."
 DESC="$SUMMARY"
 
-DEPENDS_IPS="system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime"
 
 PREFIX=/opt/python27
 BUILDARCH=64

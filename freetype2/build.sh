@@ -31,11 +31,11 @@
 PROG=freetype
 VER=2.5.3
 VERHUMAN=$VER
-PKG=library/freetype2 
+PKG=library/freetype2
 SUMMARY="A Free, High-Quality, and Portable Font Engine"
 DESC="$SUMMARY ($VER)"
 
-DEPENDS_IPS="system/library/gcc-4-runtime library/libpng"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime library/libpng"
 
 export GNUMAKE=gmake
 

@@ -34,7 +34,7 @@ PKG=library/security/cyrus-sasl
 SUMMARY="Simple Authentication and Security Layer library"
 DESC="$SUMMARY ($VER)"
 
-DEPENDS_IPS="system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime"
 
 ARCHIVENAME=cyrus-sasl
 BUILDDIR=$ARCHIVENAME-$VER

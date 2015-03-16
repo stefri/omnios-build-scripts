@@ -35,7 +35,7 @@ SUMMARY="GraphicsMagick is the swiss army knife of image processing."
 DESC="$SUMMARY"
 
 BUILD_DEPENDS_IPS="library/freetype2 library/libjpeg library/libpng library/libtiff"
-DEPENDS_IPS="library/freetype2 library/libjpeg library/libpng library/libtiff"
+RUN_DEPENDS_IPS="library/freetype2 library/libjpeg library/libpng library/libtiff"
 
 CONFIGURE_OPTS="--enable-shared \
         --disable-openmp"

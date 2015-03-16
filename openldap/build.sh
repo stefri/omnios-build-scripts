@@ -36,7 +36,7 @@ DESC="$SUMMARY ($VER)"
 
 BUILDARCH=32
 BUILD_DEPENDS_IPS="developer/build/libtool library/libtool/libltdl"
-DEPENDS_IPS="system/library/gcc-4-runtime database/bdb library/security/cyrus-sasl service/network/slp"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime database/bdb library/security/cyrus-sasl service/network/slp"
 
 CONFIGURE_OPTS="--sysconfdir=/etc
     --localstatedir=/var/slapd

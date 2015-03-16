@@ -40,7 +40,7 @@ PYTHON=/opt/python27/bin/python
 
 LDFLAGS64="-L$PYTHONLIB -R$PYTHONLIB -L/usr/local/lib/$ISAPART64 -R/usr/local/lib/$ISAPART64"
 
-DEPENDS_IPS="runtime/python-27 library/libpq5"
+RUN_DEPENDS_IPS="runtime/python-27 library/libpq5"
 BUILD_DEPENDS_IPS=$DEPENDS_IPS
 
 init

@@ -35,7 +35,7 @@ PKG=database/postgresql/client
 SUMMARY="PostgreSQL standalone client utilities"
 DESC="$SUMMARY (psql, pg_dump, pg_dumpall, pg_restore)"
 
-DEPENDS_IPS="system/library/gcc-4-runtime library/libpq5"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime library/libpq5"
 
 BUILDARCH=64
 

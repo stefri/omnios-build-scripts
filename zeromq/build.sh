@@ -35,7 +35,7 @@ SUMMARY="The ZeroMQ messaging library"
 DESC="The 0MQ lightweight messaging kernel is a library which extends the standard socket interfaces with features traditionally provided by specialised messaging middleware products. 0MQ sockets provide an abstraction of asynchronous message queues, multiple messaging patterns, message filtering (subscriptions), seamless access to multiple transport protocols and more."
 
 #DEPENDS_IPS="system/library/gcc-4-runtime library/security/libsodium"
-DEPENDS_IPS="system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime"
 
 #BUILDARCH=64
 LDFLAGS32="$LDFLAGS32 -L/usr/local/lib -R/usr/local/lib"

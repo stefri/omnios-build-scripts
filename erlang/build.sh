@@ -44,7 +44,7 @@ export ERL_TOP
 ##
 BUILDARCH=64
 BUILD_DEPENDS_IPS="archiver/gnu-tar developer/java/jdk"
-DEPENDS_IPS="library/security/openssl developer/dtrace
+RUN_DEPENDS_IPS="library/security/openssl developer/dtrace
     system/library system/library/math"
 NO_PARALLEL_MAKE=1
 

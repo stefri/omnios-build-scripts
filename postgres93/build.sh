@@ -35,7 +35,7 @@ SUMMARY="$PROG - Open Source Database System"
 DESC="$SUMMARY"
 
 BUILD_DEPENDS_IPS="system/library/gcc-4-runtime"
-DEPENDS_IPS="database/postgresql/common system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="database/postgresql/common system/library/gcc-4-runtime"
 
 PREFIX="/usr/local/postgresql/9.3"
 BUILDARCH=64

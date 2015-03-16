@@ -34,7 +34,7 @@ PKG=service/network/samba4
 SUMMARY="$PROG - CIFS server and active directory controller"
 DESC="$SUMMARY ($VERS)"
 
-DEPENDS_IPS="service/network/dns/mdns system/library system/library/gcc-4-runtime system/library/math
+RUN_DEPENDS_IPS="service/network/dns/mdns system/library system/library/gcc-4-runtime system/library/math
              library/libldap library/security/cyrus-sasl runtime/python-27"
 # blkid, gnutls, readline, cups, bsd or setproctitle, xsltproc, docbook
 

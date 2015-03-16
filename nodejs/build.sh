@@ -40,7 +40,7 @@ SUMMARY="evented I/O for v8 javascript"
 DESC="Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices."
 
 BUILD_DEPENDS_IPS="developer/versioning/git runtime/python-26"
-DEPENDS_IPS="library/security/openssl library/zlib runtime/python-26
+RUN_DEPENDS_IPS="library/security/openssl library/zlib runtime/python-26
         shell/bash system/library/g++-4-runtime system/library/gcc-4-runtime
         system/library/math system/library"
 

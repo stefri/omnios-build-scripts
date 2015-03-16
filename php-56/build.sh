@@ -33,7 +33,7 @@ PKG=runtime/php56
 SUMMARY="PHP Server 5.6"
 DESC="PHP is a widely-used general-purpose scripting language that is especially suited for Web development and can be embedded into HTML."
 
-BUILD_DEPENDS_IPS="compress/bzip2
+RUN_DEPENDS_IPS="compress/bzip2
     mawi/database/sqlite
     database/bdb
     library/libtool/libltdl

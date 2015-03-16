@@ -34,7 +34,7 @@ PKG=monitoring/bzl
 SUMMARY="Bind 9.x statistics parser"
 DESC="Parse the XML produced by a BIND9.x statistics-server to list zones contained therein."
 
-DEPENDS_IPS="library/libxml2"
+RUN_DEPENDS_IPS="library/libxml2"
 BUILDARCH=32
 
 export PREFIX

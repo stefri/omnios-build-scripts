@@ -34,7 +34,7 @@ PKG=service/network/openvpn
 SUMMARY="Secure IP tunnel daemon"
 DESC="$SUMMARY ($VER)"
 
-DEPENDS_IPS="system/network/tuntap library/lzo"
+RUN_DEPENDS_IPS="system/network/tuntap library/lzo"
 CONFIGURE_OPTS="--sysconfdir=/etc/openvpn
     --localstatedir=/var/openvpn"
 

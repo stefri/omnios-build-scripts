@@ -34,7 +34,7 @@ PKG=service/network/smtp/postfix
 SUMMARY="Postfix Mail Transport Agent"
 DESC="Postfix is a Mail Transport Agent (MTA), this is a very basic configuration only supporting Berkeley DB based configuration"
 
-DEPENDS_IPS="database/bdb library/libpq5 library/libldap library/security/cyrus-sasl"
+RUN_DEPENDS_IPS="database/bdb library/libpq5 library/libldap library/security/cyrus-sasl"
 
 BUILDARCH=32
 USER=postfix

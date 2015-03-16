@@ -35,7 +35,7 @@ PKG=library/libpq5
 SUMMARY="PostgreSQL Libs (libpq.so.5)"
 DESC="Use this package if you just need to link and/or build against libpq"
 
-DEPENDS_IPS="system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime"
 
 CFLAGS="-O3"
 CPPFLAGS="-D_REENTRANT"

@@ -36,7 +36,7 @@ DESC="$SUMMARY ($VER)"
 
 BUILDARCH=32
 BUILD_DEPENDS_IPS=""
-DEPENDS_IPS="system/library/gcc-4-runtime database/bdb library/libpq5
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime database/bdb library/libpq5
              library/libldap library/security/cyrus-sasl"
 
 CONFIGURE_OPTS="--sysconfdir=/etc

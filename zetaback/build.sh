@@ -29,12 +29,12 @@
 
 PROG=zetaback
 VER=1.0.6.1
-PKG=tools/backup/zetaback 
+PKG=tools/backup/zetaback
 SUMMARY="$PROG"
 DESC="$SUMMARY ($VER) - Lets you backup allz your ZFS's"
 
 BUILD_DEPENDS_IPS="developer/build/gnu-make runtime/perl"
-DEPENDS_IPS="runtime/perl"
+RUN_DEPENDS_IPS="runtime/perl"
 
 # We changed the prefix - need to regenerate the CONFIGURE_OPTS
 CONFIGURE_OPTS_32="--prefix=$PREFIX --sysconfdir=/etc/zetaback"

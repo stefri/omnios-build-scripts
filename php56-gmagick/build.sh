@@ -34,7 +34,7 @@ SUMMARY="Provides a wrapper to the GraphicsMagick library."
 DESC="$SUMMARY ($VER)"
 
 BUILD_DEPENDS_IPS="library/pkgconf"
-DEPENDS_IPS="runtime/php55 application/image/graphicsmagick"
+RUN_DEPENDS_IPS="runtime/php55 application/image/graphicsmagick"
 
 BUILDARCH=64
 CONFIGURE_OPTS="--with-gmagick=/usr/local \

@@ -41,7 +41,7 @@ LDFLAGS64="-L$PYTHONLIB -R$PYTHONLIB -L/usr/local/lib/$ISAPART64 -R/usr/local/li
 PYTHON=/opt/python27/bin/python
 PATH=/usr/local/bin:/opt/python27/bin:$PATH
 
-DEPENDS_IPS="runtime/python-27 library/freetype2 library/libjpeg local/library/zlib"
+RUN_DEPENDS_IPS="runtime/python-27 library/freetype2 library/libjpeg local/library/zlib"
 BUILD_DEPENDS_IPS="library/python-27/setuptools"
 
 init

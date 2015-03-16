@@ -34,7 +34,7 @@ PKG=runtime/python-34
 SUMMARY="$PROG - An Interpreted, Interactive, Object-oriented, Extensible Programming Language."
 DESC="$SUMMARY"
 
-DEPENDS_IPS="system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime"
 
 PREFIX=/opt/python34
 BUILDARCH=64
@@ -60,7 +60,7 @@ build() {
     CC="$CC $CFLAGS $CFLAGS64" \
     CXX="$CXX $CXXFLAGS $CXXFLAGS64" \
     build64
-    mv "$DESTDIR/$PREFIX/lib/python3.4/site-packages/setuptools/script template (dev).py" "$DESTDIR/$PREFIX/lib/python3.4/site-packages/setuptools/script_template_dev.py" 
+    mv "$DESTDIR/$PREFIX/lib/python3.4/site-packages/setuptools/script template (dev).py" "$DESTDIR/$PREFIX/lib/python3.4/site-packages/setuptools/script_template_dev.py"
     mv "$DESTDIR/$PREFIX/lib/python3.4/site-packages/setuptools/script template.py" "$DESTDIR/$PREFIX/lib/python3.4/site-packages/setuptools/script_template.py"
     mv "$DESTDIR/$PREFIX/lib/python3.4/site-packages/setuptools/command/launcher manifest.xml" "$DESTDIR/$PREFIX/lib/python3.4/site-packages/setuptools/command/launcher_manifest.xml"
     mv "$DESTDIR/$PREFIX/lib/python3.4/site-packages/setuptools/__pycache__/script template (dev).cpython-34.pyc" "$DESTDIR/$PREFIX/lib/python3.4/site-packages/setuptools/__pycache__/script_template_dev.cpython-34.pyc"

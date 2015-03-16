@@ -34,7 +34,7 @@ PKG=shell/mosh
 SUMMARY="Mosh: the mobile shell"
 DESC="Remote terminal application that allows roaming, supports intermittent connectivity, and provides intelligent local echo and line editing of user keystrokes. Mosh is a replacement for SSH. It's more robust and responsive, especially over Wi-Fi, cellular, and long-distance links."
 
-DEPENDS_IPS="library/protobuf"
+RUN_DEPENDS_IPS="library/protobuf"
 
 BUILDARCH=32
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig:/usr/local/lib/pkgconfig"

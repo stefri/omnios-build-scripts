@@ -34,8 +34,9 @@ PKG=service/network/nginx
 SUMMARY="Nginx, http server and reverse proxy"
 DESC="Nginx (pronounced engine-x) is a free, open-source, high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server."
 
-DEPENDS_IPS="library/libgd"
+RUN_DEPENDS_IPS="library/libgd pkg:/local/library/zlib pkg:/mawi/library/pcre"
 BUILDARCH=32
+REMOVE_PREVIOUS=true
 
 CONFIGURE_OPTS_32=""
 CONFIGURE_OPTS="
@@ -57,7 +58,7 @@ CONFIGURE_OPTS="
     --with-http_ssl_module
     --with-http_spdy_module
     --with-http_realip_module
-    --with-http_addition_module 
+    --with-http_addition_module
     --with-http_xslt_module
     --with-http_image_filter_module
     --with-http_sub_module
@@ -89,7 +90,7 @@ service_configs() {
 
 mk_tmp_dir() {
     logmsg "Creating temporary directory"
-    logcmd mkdir -p $DESTDIR/var/$PROG/tmp 
+    logcmd mkdir -p $DESTDIR/var/$PROG/tmp
 }
 
 init

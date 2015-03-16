@@ -34,7 +34,7 @@ PKG=library/security/gnutls
 SUMMARY="The GnuTLS Transport Layer Security Library"
 DESC="$SUMMARY ($VER)"
 
-DEPENDS_IPS="library/security/nettle library/libtasn1 local/library/zlib"
+RUN_DEPENDS_IPS="library/security/nettle library/libtasn1 local/library/zlib"
 
 CONFIGURE_OPTS="--disable-static"
 CFLAGS="-I/usr/include -I/usr/local/include --std=c99"

@@ -34,7 +34,7 @@ PKG=library/libtasn1
 SUMMARY="Tiny ASN.1 library"
 DESC="$SUMMARY ($VER)"
 
-DEPENDS_IPS="system/library system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="system/library system/library/gcc-4-runtime"
 
 CONFIGURE_OPTS="--disable-static"
 

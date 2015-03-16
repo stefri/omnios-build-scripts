@@ -36,7 +36,7 @@ DESC="$SUMMARY ($VER)"
 
 BUILDARCH=32
 BUILD_DEPENDS_IPS=""
-DEPENDS_IPS="system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="system/library/gcc-4-runtime"
 
 CONFIGURE_OPTS="--sysconfdir=/etc/$PROG
     --localstatedir=/var/$PROG

@@ -41,7 +41,7 @@ LDFLAGS64="-L$PYTHONLIB -R$PYTHONLIB -L/opt/omni/lib/$ISAPART64 -R/opt/omni/lib/
 PYTHON=/opt/python27/bin/python
 PATH=/usr/local/bin:/opt/python27/bin:$PATH
 
-DEPENDS_IPS="runtime/python-27"
+RUN_DEPENDS_IPS="runtime/python-27"
 BUILD_DEPENDS_IPS="$DEPENDS_IPS library/python-27/setuptools"
 BUILDDIR=$TITLE-$VER
 

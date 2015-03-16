@@ -33,13 +33,13 @@ PKG=library/libgd
 SUMMARY="$PROG - GD Graphics Library"
 DESC="$SUMMARY ($VER)"
 
-DEPENDS_IPS="library/libpng library/libjpeg library/libtiff library/freetype2"
+RUN_DEPENDS_IPS="library/libpng library/libjpeg library/libtiff library/freetype2"
 
 CONFIGURE_OPTS="--with-png=$PREFIX \
     --with-freetype=$PREFIX \
     --with-jpeg=$PREFIX \
     --with-tiff=$PREFIX \
-    --without-xpm" 
+    --without-xpm"
 #    --with-vpx=$PREFIX"
 
 init

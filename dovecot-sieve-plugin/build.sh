@@ -37,7 +37,7 @@ DESC="$SUMMARY ($VER)"
 
 BUILDARCH=32
 CONFIGURE_OPTS="--sysconfdir=/etc"
-DEPENDS_IPS="service/network/imap/dovecot"
+RUN_DEPENDS_IPS="service/network/imap/dovecot"
 
 init
 download_source $PROG $PROG $VER

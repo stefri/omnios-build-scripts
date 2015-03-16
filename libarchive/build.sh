@@ -34,7 +34,7 @@ PKG=library/libarchive
 SUMMARY="Multi-format archive and compression library"
 DESC="$SUMMARY ($VER)"
 
-DEPENDS_IPS="library/lzo library/libxml2 compress/bzip2 local/library/zlib"
+RUN_DEPENDS_IPS="library/lzo library/libxml2 compress/bzip2 local/library/zlib"
 
 CONFIGURE_OPTS="--with-zlib=/usr/local/lib"
 

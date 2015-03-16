@@ -37,7 +37,7 @@ DESC="$SUMMARY ($VER)"
 BUILDDIR=$PROG-$VER
 BUILDARCH=32
 
-DEPENDS_IPS="system/library system/library/gcc-4-runtime"
+RUN_DEPENDS_IPS="system/library system/library/gcc-4-runtime"
 
 CONFIGURE_OPTS="
     --bindir=$PREFIX/sbin

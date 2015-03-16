@@ -33,8 +33,8 @@ PKG=service/network/dns/bind
 SUMMARY="BIND DNS server and tools"
 DESC="$SUMMARY ($VER)"
 
-DEPENDS_IPS="library/libxml2 library/security/openssl library/zlib
-             system/library system/library/gcc-4-runtime system/library/math"
+RUN_DEPENDS_IPS="library/libxml2 library/security/openssl library/zlib
+                 system/library system/library/gcc-4-runtime system/library/math"
 
 CONFIGURE_OPTS="
     --bindir=$PREFIX/sbin
