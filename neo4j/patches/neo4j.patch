@@ -1,105 +1,223 @@
-diff -rupN neo4j-community-2.1.5.orig/bin/neo4j neo4j-community-2.1.5/bin/neo4j
---- neo4j-community-2.1.5.orig/bin/neo4j	2014-09-30 08:35:40.000000000 +0200
-+++ neo4j-community-2.1.5/bin/neo4j	2014-11-19 16:28:11.079864966 +0100
-@@ -31,6 +31,7 @@
+diff -rupN neo4j-community-2.2.0.orig/bin/neo4j neo4j-community-2.2.0/bin/neo4j
+--- neo4j-community-2.2.0.orig/bin/neo4j	2015-03-24 13:59:49.000000000 +0100
++++ neo4j-community-2.2.0/bin/neo4j	2015-03-30 14:10:57.616195089 +0200
+@@ -1,15 +1,4 @@
+-#!/usr/bin/env bash
+-### BEGIN REDHAT INFO
+-# chkconfig: 2345 99 20
+-# description: The Neo4J graph database server. See http://neo4j.org
+-### END REDHAT INFO
+-### BEGIN INIT INFO
+-# Provides:          neo4j-service
+-# Required-Start:
+-# Required-Stop:
+-# Default-Start:     2 3 4 5
+-# Default-Stop:      0 1 6
+-### END INIT INFO
++#!/usr/bin/bash
+ # Copyright (c) 2002-2015 "Neo Technology,"
+ 
+ # Network Engine for Objects in Lund AB [http://neotechnology.com]
+@@ -31,6 +20,9 @@
  
  FRIENDLY_NAME="Neo4j Server"
  LAUNCHD_NAME="org.neo4j.server"
-+EGREP=gegrep
++GREP="ggrep"
++EGREP="gegrep"
++AWK="gawk"
  
  function findBaseDirAndCdThere {
  # This seems to not be safe to run at any time. If that
-@@ -47,7 +48,9 @@ function findBaseDirAndCdThere {
+@@ -47,6 +39,9 @@ function findBaseDirAndCdThere {
      SCRIPT=`basename "$SCRIPT"`
    done
    NEO4J_HOME=`cd $( dirname "$SCRIPT" )/.. && dirs -l +0`
--  NEO4J_INSTANCE=$NEO4J_HOME
-+  if [ -z "$NEO4J_INSTANCE" ]; then
-+    NEO4J_INSTANCE="$NEO4J_HOME"
-+  fi
++ if [ -z "$NEO4J_INSTANCE" ]; then
++     NEO4J_INSTANCE="$NEO4J_HOME"
++ fi
+   NEO4J_INSTANCE=$NEO4J_HOME
    NEO4J_CONFIG=$NEO4J_INSTANCE/conf
    NEO4J_LOG=$NEO4J_INSTANCE/data/log
- 
-@@ -74,7 +77,7 @@ JAVA_OPTS="-server -XX:+DisableExplicitG
+@@ -74,8 +69,7 @@ JAVA_OPTS="-server -XX:+DisableExplicitG
  [ -z "${wrapper_java_initmemory}" ] || JAVA_OPTS="$JAVA_OPTS -Xms${wrapper_java_initmemory}m"
  [ -z "${wrapper_java_maxmemory}" ] || JAVA_OPTS="$JAVA_OPTS -Xmx${wrapper_java_maxmemory}m"
  
 -#NEO4J_SERVER_PORT=`( egrep "^org.neo4j.server.webserver.port" $NEO4J_INSTANCE/conf/neo4j-server.properties || echo 7474 ) | sed -e 's/.*=//'`
-+#NEO4J_SERVER_PORT=`( $EGREP "^org.neo4j.server.webserver.port" $NEO4J_INSTANCE/conf/neo4j-server.properties || echo 7474 ) | sed -e 's/.*=//'`
- NEO4J_SERVER_PORT=${org_neo4j_server_webserver_port:=7474}
+-NEO4J_SERVER_PORT=${org_neo4j_server_webserver_port:=7474}
++NEO4J_SERVER_PORT=`( $EGREP "^org.neo4j.server.webserver.port" $NEO4J_INSTANCE/conf/neo4j-server.properties || echo 7474 ) | sed -e 's/.*=//'`
  
  LAUNCHD_NAME="${LAUNCHD_NAME}.${NEO4J_SERVER_PORT}"
-@@ -138,15 +141,24 @@ buildclasspath() {
+ 
+@@ -138,15 +132,24 @@ buildclasspath() {
  }
  
  detectrunning() {
 -  if [ $DIST_OS = "solaris" ] ; then
--      ## SmartOS has a different lsof command line arguments
--      newpid=$(lsof -o $NEO4J_SERVER_PORT | grep '::' | head -n1 | cut -d ' ' -f 1)
--  else
--      ## This could be achieved with filtering using -sTCP:LISTEN but this option is not available
--      ## on lsof v4.78 which is the one bundled with some distros. So we have to do this grep below
--      newpid=$(lsof -i :$NEO4J_SERVER_PORT -F T -Ts | grep -i "TST=LISTEN" -B1 | head -n1)
--      newpid=${newpid:1}
--  fi
 +  case $DIST_OS in
 +  'omnios')
-+    if [ -e "$PID_FILE" ]; then
-+      ## OmniOS does not include the hacky lsof, we should use netstat instead
-+      newpid=$(netstat -an | grep "\.$NEO4J_SERVER_PORT" | cat "$PID_FILE" )
-+    fi
-+    ;;
++      if [ -e "$PID_FILE" ]; then
++          ## OmniOS does not include the hacky lsof, we should use netstat instead
++          newpid=$(netstat -an | $GREP "\.$NEO4J_SERVER_PORT" | cat "$PID_FILE" )
++      fi
++      ;;
 +  'solaris')
-+    ## SmartOS has a different lsof command line arguments
-+    newpid=$(lsof -o $NEO4J_SERVER_PORT | grep '::' | head -n1 | cut -d ' ' -f 1)
-+    ;;
+       ## SmartOS has a different lsof command line arguments
+-      newpid=$(lsof -o $NEO4J_SERVER_PORT | grep '::' | head -n1 | cut -d ' ' -f 1)
+-  else
++      newpid=$(lsof -o $NEO4J_SERVER_PORT | $GREP '::' | head -n1 | cut -d ' ' -f 1)
++      ;;
 +  *)
-+    ## This could be achieved with filtering using -sTCP:LISTEN but this option is not available
-+    ## on lsof v4.78 which is the one bundled with some distros. So we have to do this grep below
-+    newpid=$(lsof -i :$NEO4J_SERVER_PORT -F T -Ts | grep -i "TST=LISTEN" -B1 | head -n1)
-+    newpid=${newpid:1}
-+    ;;
+       ## This could be achieved with filtering using -sTCP:LISTEN but this option is not available
+       ## on lsof v4.78 which is the one bundled with some distros. So we have to do this grep below
+-      newpid=$(lsof -i :$NEO4J_SERVER_PORT -F T -Ts | grep -i "TST=LISTEN" -B1 | head -n1)
++      newpid=$(lsof -i :$NEO4J_SERVER_PORT -F T -Ts | $GREP -i "TST=LISTEN" -B1 | head -n1)
+       newpid=${newpid:1}
+-  fi
++      ;;
 +  esac
  }
  
  startit() {
-@@ -195,7 +207,7 @@ startit() {
+@@ -160,8 +163,8 @@ startit() {
+ 
+   detectrunning
+   if [ $newpid ] ; then
+-	     echo "Another server-process is running with [$newpid], cannot start a new one. Exiting."
+-	     exit 2;
++       echo "Another server-process is running with [$newpid], cannot start a new one. Exiting."
++       exit 2;
+   fi
+ 
+   if [ $DIST_OS = "macosx" ] ; then
+@@ -193,7 +196,6 @@ startit() {
          org.neo4j.server.Bootstrapper >> \"${CONSOLE_LOG}\" 2>&1 & echo \$! > \"$PID_FILE\" "
      else
        checkwriteaccess
 -      echo "WARNING: not changing user"
-+      #echo "WARNING: not changing user"
        "$JAVACMD" -cp "${CLASSPATH}" $JAVA_OPTS  \
          -Dneo4j.home="${NEO4J_HOME}" -Dneo4j.instance="${NEO4J_INSTANCE}" \
          -Dfile.encoding=UTF-8 \
-@@ -393,4 +405,4 @@ case "${!OPTIND}" in
+@@ -215,43 +217,44 @@ startit() {
+ 
+     echo -n "process [$STARTED_PID]"
+ 
+-	  if [ $WAIT = "true" ] ; then
+-	    echo -n "... waiting for server to be ready."
+-	    while kill -0 $STARTED_PID 2> /dev/null ; do
+-	      ## wait for start, pick up the server listening on the port
+-	      detectrunning
+-	      if [ $newpid ] ; then
+-	         break
+-	      fi
+-
+-	      printf "."
+-	      sleep 1
+-	    done
+-
+-	    if kill -0 $STARTED_PID 2>/dev/null ; then
+-	      if [ "$newpid" != "$STARTED_PID" ] ; then
+-		    rm "$PID_FILE"
+-	        kill -9 $STARTED_PID
+-	        echo " Failed to start within $TIMEOUT seconds."
+-	        echo "$FRIENDLY_NAME failed to start, please check the logs for details."
+-	        echo "If startup is blocked on a long recovery, use '$0 start-no-wait' to give the startup more time."
+-	        exit 2
+-	      fi
++    if [ $WAIT = "true" ] ; then
++      echo -n "... waiting for server to be ready."
++      while kill -0 $STARTED_PID 2> /dev/null ; do
++        ## wait for start, pick up the server listening on the port
++        detectrunning
++        if [ $newpid ] ; then
++           break
++        fi
++
++        printf "."
++        sleep 1
++      done
+ 
+-	      echo " OK."
++      if kill -0 $STARTED_PID 2>/dev/null ; then
++        if [ "$newpid" != "$STARTED_PID" ] ; then
++        rm "$PID_FILE"
++          kill -9 $STARTED_PID
++          echo " Failed to start within $TIMEOUT seconds."
++          echo "$FRIENDLY_NAME failed to start, please check the logs for details."
++          echo "If startup is blocked on a long recovery, use '$0 start-no-wait' to give the startup more time."
++          exit 2
++        fi
++
++        echo " OK."
+         echo "http://localhost:$NEO4J_SERVER_PORT/ is ready."
+-	      exit 0
+-	    fi
++        exit 0
++      fi
+ 
+-	    echo " Failed to start within $TIMEOUT seconds."
+-	    echo "$FRIENDLY_NAME may have failed to start, please check the logs."
+-	    rm "$PID_FILE"
+-	    exit 1
++      echo " Failed to start within $TIMEOUT seconds."
++      echo "$FRIENDLY_NAME may have failed to start, please check the logs."
++      rm "$PID_FILE"
++      exit 1
+     else
+         echo "...Started the server in the background, returning..."
+     fi
+   else
+     echo "$FRIENDLY_NAME already running with pid $NEO4J_PID"
++    stopit
+     exit 0
+   fi
+ }
+@@ -287,13 +290,13 @@ console() {
+ # pass in "true" for created to mark that the user was created (instead than pre-existing)
+ modify_user_config() {
+   created=${2:-"false"}
+-  if `grep -q "wrapper\.user=" "$NEO4J_INSTANCE/conf/neo4j-wrapper.conf"` ; then
++  if `$GREP -q "wrapper\.user=" "$NEO4J_INSTANCE/conf/neo4j-wrapper.conf"` ; then
+     sed -i -e "s/^.*wrapper\.user=.*$/wrapper\.user=$1/" "$NEO4J_INSTANCE/conf/neo4j-wrapper.conf"
+   else
+     echo "wrapper.user=$1" >> "$NEO4J_INSTANCE/conf/neo4j-wrapper.conf"
+   fi
+ 
+-  if `grep -q "wrapper\.user\.created=" "$NEO4J_INSTANCE/conf/neo4j-wrapper.conf"` ; then
++  if `$GREP -q "wrapper\.user\.created=" "$NEO4J_INSTANCE/conf/neo4j-wrapper.conf"` ; then
+     sed -i -e "s/^.*wrapper\.user\.created=.*$/wrapper\.user\.created=${created}/" "$NEO4J_INSTANCE/conf/neo4j-wrapper.conf"
+   else
+     echo "wrapper.user.created=${created}" >> "$NEO4J_INSTANCE/conf/neo4j-wrapper.conf"
+@@ -391,4 +394,4 @@ case "${!OPTIND}" in
  
  esac
  
 -exit $?
 \ No newline at end of file
 +exit $?
-diff -rupN neo4j-community-2.1.5.orig/bin/utils neo4j-community-2.1.5/bin/utils
---- neo4j-community-2.1.5.orig/bin/utils	2014-09-30 08:35:40.000000000 +0200
-+++ neo4j-community-2.1.5/bin/utils	2014-11-19 16:27:38.397517550 +0100
-@@ -129,7 +129,7 @@ checkstatus() {
- checkwriteaccess() {
-     if [ $UID != 0 ] ; then
-     if [ ! -w "$NEO4J_INSTANCE/data" ] ; then
--      echo "ERROR: No write access to data/ directory, run either as user $NEO4J_USER or root"
-+      echo "ERROR: No write access to $NEO4J_INSTANCE/data/ directory, run either as user $NEO4J_USER or root"
-       exit 1
-     fi
-     fi
-@@ -175,13 +175,17 @@ detectos() {
+diff -rupN neo4j-community-2.2.0.orig/bin/utils neo4j-community-2.2.0/bin/utils
+--- neo4j-community-2.2.0.orig/bin/utils	2015-03-24 13:59:49.000000000 +0100
++++ neo4j-community-2.2.0/bin/utils	2015-03-30 14:47:55.919120340 +0200
+@@ -18,6 +18,11 @@
+ # You should have received a copy of the GNU General Public License
+ # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ 
++AWK="gawk"
++GREP="ggrep"
++EGREP="gegrep"
++
++
+ 
+ function show_java_requirements() {
+   echo "* Please use Oracle(R) Java(TM) 7 or OpenJDK(TM) to run Neo4j Server."
+@@ -175,13 +180,17 @@ detectos() {
    DIST_OS=`uname -s | tr 'A-Z' 'a-z' | tr -d ' '`
    case "$DIST_OS" in
      'sunos')
 -      DIST_OS="solaris"
-+      if grep -q 'OmniOS' /etc/release; then
-+        DIST_OS="omnios"
++      if $GREP -q 'OmniOS' /etc/release; then
++         DIST_OS="omnios"
 +      else
-+        DIST_OS="solaris"
++         DIST_OS="solaris"
 +      fi
        ;;
      'hp-ux' | 'hp-ux64')
@@ -111,7 +229,16 @@ diff -rupN neo4j-community-2.1.5.orig/bin/utils neo4j-community-2.1.5/bin/utils
        ;;
      'darwin')
        DIST_OS="macosx"
-@@ -266,12 +270,12 @@ remove_user() {
+@@ -199,7 +208,7 @@ detectos() {
+ }
+ 
+ getlaunchdpid() {
+-  LAUNCHDPID=$(launchctl list | grep $LAUNCHD_NAME | cut -f 1)
++  LAUNCHDPID=$(launchctl list | $GREP $LAUNCHD_NAME | cut -f 1)
+   if [ -z $LAUNCHDPID ] ; then
+     # Not there
+     LAUNCHDPID=-1
+@@ -266,12 +275,12 @@ remove_user() {
      else
        DELETE_CMD='/usr/sbin/userdel'
      fi
@@ -126,7 +253,7 @@ diff -rupN neo4j-community-2.1.5.orig/bin/utils neo4j-community-2.1.5/bin/utils
          ;;
      esac
    else
-@@ -324,11 +328,11 @@ removeservice() {
+@@ -324,11 +333,11 @@ removeservice() {
  # in place.
  checkandrepairenv() {
      # Create data/log if missing, change owner if created.
@@ -142,28 +269,40 @@ diff -rupN neo4j-community-2.1.5.orig/bin/utils neo4j-community-2.1.5/bin/utils
        fi
      fi
  }
-@@ -371,13 +375,13 @@ complain_about_java_version() {
+@@ -344,6 +353,11 @@ checklimits() {
+ 
+       if [ $OPEN_FILES -lt 40000 ]; then
+         echo "WARNING: Max $OPEN_FILES open files allowed, minimum of 40 000 recommended. See the Neo4j manual."
++
++        if [[ $DIST_OS -eq "omnios" ]]; then
++          echo "To set open files for neo4j, create a project and set project resources:"
++          echo '# projadd -c "Neo4j User" -K "process.max-file-descriptor=(basic,65536,deny)" -U neo4j -G neo4j user.neo4j'
++        fi
+       fi
+     fi
+ }
+@@ -371,13 +385,13 @@ complain_about_java_version() {
  # check if running Oracle JDK 7 or OpenJDK 7, warn if not
  checkjvmcompatibility() {
    # Shut down if java version < 1.7
 -  JAVAVERSION=$("$JAVACMD" -version 2>&1 | awk -F '"' '/version/ {print $2}')
-+  JAVAVERSION=$("$JAVACMD" -version 2>&1 | gawk -F '"' '/version/ {print $2}')
++  JAVAVERSION=$("$JAVACMD" -version 2>&1 | $AWK -F '"' '/version/ {print $2}')
    if [[ "$JAVAVERSION" < "1.7" ]]; then
      complain_about_java_version
      exit 1
    fi
  
 -  $JAVACMD -version 2>&1 | egrep -q "(Java HotSpot\\(TM\\)|OpenJDK) (64-Bit Server|Server|Client) VM"
-+  $JAVACMD -version 2>&1 | gegrep -q "(Java HotSpot\\(TM\\)|OpenJDK) (64-Bit Server|Server|Client) VM"
++  $JAVACMD -version 2>&1 | $EGREP -q "(Java HotSpot\\(TM\\)|OpenJDK) (64-Bit Server|Server|Client) VM"
    if [ $? -eq 1 ]
    then
      warn_about_java_runtime
-@@ -385,6 +389,6 @@ checkjvmcompatibility() {
+@@ -385,6 +399,6 @@ checkjvmcompatibility() {
  }
  
  checkclasspath() {
 -  echo $CLASSPATH | egrep -q 'neo4j-kernel-[0-9.]{2,8}-SNAPSHOT' && \
-+  echo $CLASSPATH | gegrep -q 'neo4j-kernel-[0-9.]{2,8}-SNAPSHOT' && \
++  echo $CLASSPATH | $EGREP -q 'neo4j-kernel-[0-9.]{2,8}-SNAPSHOT' && \
    echo -e "\nWARNING! Latest Development Build. Not intended for general-purpose use. May be unstable."
 -}
 \ No newline at end of file

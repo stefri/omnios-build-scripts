@@ -28,12 +28,12 @@
 . ../../lib/functions.sh
 
 PROG="neo4j"
-VER="2.1.5"
+VER="2.2.0"
 VERHUMAN=$VER
 SUMMARY="Neo4j is a robust (fully ACID) transactional property graph database."
 DESC="Neo4j is a robust (fully ACID) transactional property graph database. Due to its graph data model, Neo4j is highly agile and blazing fast. For connected data operations, Neo4j runs a thousand times faster than relational databases."
 
-PREFIX="/usr/local/neo4j"
+PREFIX="/opt/neo4j"
 NO_AUTO_DEPENDS=true
 
 case $FLAVOR in

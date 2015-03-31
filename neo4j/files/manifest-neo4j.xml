@@ -50,17 +50,17 @@
 
   <exec_method type='method'
                name='start'
-               exec='/usr/local/neo4j/bin/neo4j start'
+               exec='/opt/neo4j/bin/neo4j start'
                timeout_seconds='130'/>
 
   <exec_method type='method'
                name='stop'
-               exec='/usr/local/neo4j/bin/neo4j stop'
+               exec='/opt/neo4j/bin/neo4j stop'
                timeout_seconds='130' />
 
   <exec_method type='method'
                name='restart'
-               exec='/usr/local/neo4j/bin/neo4j restart'
+               exec='/opt/neo4j/bin/neo4j restart'
                timeout_seconds='130' />
 
 
