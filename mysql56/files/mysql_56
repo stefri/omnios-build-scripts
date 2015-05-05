@@ -79,8 +79,8 @@ if [ -z $datadir ]; then
     exit $SMF_EXIT_ERR_CONFIG
 fi
 
-if [ -z $myconf ]; then
-    echo "Error: mysql_56/myconf property not set"
+if [ -z $mycnf ]; then
+    echo "Error: mysql_56/mycnf property not set"
     exit $SMF_EXIT_ERR_CONFIG
 fi
 
