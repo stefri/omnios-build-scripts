@@ -28,7 +28,7 @@
 . ../../lib/functions.sh
 
 PROG=postfix
-VER=2.11.1
+VER=2.11.7
 VERHUMAN=$VER
 PKG=service/network/smtp/postfix
 SUMMARY="Postfix Mail Transport Agent"
@@ -96,10 +96,10 @@ service_configs() {
 
 sendmail_compat() {
     logmsg "Creating symlinks for sendmail compatibility"
-    logcmd mkdir -p $DESTDIR/usr/lib
-    logcmd ln -s ../local/sbin/sendmail $DESTDIR/usr/lib/sendmail
     logcmd mkdir -p $DESTDIR/usr/sbin
+    logcmd ln -s ../local/sbin/sendmail $DESTDIR/usr/sbin/newaliases
     logcmd ln -s ../local/sbin/sendmail $DESTDIR/usr/sbin/sendmail
+    logcmd ln -s ../local/sbin/sendmail $DESTDIR/usr/sbin/mailq
 }
 
 init
@@ -110,6 +110,21 @@ build
 make_isa_stub
 service_configs
 sendmail_compat
+make_package
+clean_up
+
+# Vim hints
+# vim:ts=4:sw=4:et:
+}
+
+init
+download_source $PROG $PROG $VER
+patch_source
+prep_build
+build
+make_isa_stub
+service_configs
+#sendmail_compat
 make_package
 clean_up
 

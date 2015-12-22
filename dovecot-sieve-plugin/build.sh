@@ -28,7 +28,7 @@
 . ../../lib/functions.sh
 
 PROG=dovecot-2.2-pigeonhole
-VER=0.4.2
+VER=0.4.7
 VERHUMAN=$VER   # Human-readable version
 #PVER=          # Branch (set in config.sh, override here if needed)
 PKG=plugins/imap/dovecot-sieve
@@ -36,8 +36,13 @@ SUMMARY="Pigeonhole is the name of the project that adds support for the Sieve l
 DESC="$SUMMARY ($VER)"
 
 BUILDARCH=32
-CONFIGURE_OPTS="--sysconfdir=/etc"
+CONFIGURE_OPTS="--sysconfdir=/etc \
+  --enable-shared=yes \
+  --enable-static=no"
 RUN_DEPENDS_IPS="service/network/imap/dovecot"
+
+CFLAGS32="-I/usr/include -I/usr/local/include"
+LDFLAGS32="-L/usr/lib -R/usr/lib -L/usr/local/lib -R/usr/local/lib -L/usr/local/lib/dovecot -R/usr/local/lib/dovecot"
 
 init
 download_source $PROG $PROG $VER

@@ -44,6 +44,9 @@ RUN_DEPENDS_IPS="system/library/gcc-4-runtime database/bdb library/libpq5
 export ACLOCAL="aclocal -I /usr/share/aclocal -I /usr/local/share/aclocal"
 CONFIGURE_OPTS="--mandir=$PREFIX/man"
 
+CFLAGS32="-I/usr/include -I/usr/local/include"
+LDFLAGS32="-L/usr/lib -R/usr/lib -L/usr/local/lib -R/usr/local/lib -L/usr/local/lib/dovecot -R/usr/local/lib/dovecot"
+
 init
 download_source $PROG $PROG $VER
 patch_source
