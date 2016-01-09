@@ -1,0 +1,9 @@
+license COPYING license=libxml2
+
+# Prevents pkgdepend from freaking out
+<transform file path=usr/local/bin/i386/xml2-config -> set pkg.depend.bypass-generate .*>
+<transform file path=usr/local/bin/i386/xmlcatalog -> set pkg.depend.bypass-generate .*>
+<transform file path=usr/local/bin/i386/xmllint -> set pkg.depend.bypass-generate .*>
+<transform file path=usr/local/bin/amd64/xml2-config -> set pkg.depend.bypass-generate .*>
+<transform file path=usr/local/bin/amd64/xmlcatalog -> set pkg.depend.bypass-generate .*>
+<transform file path=usr/local/bin/amd64/xmllint -> set pkg.depend.bypass-generate .*>

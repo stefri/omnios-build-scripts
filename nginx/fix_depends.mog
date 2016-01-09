@@ -1,0 +1,5 @@
+<transform depend pkg.debug.depend.file=libz.so -> delete pkg.debug.depend.path usr/lib.*>
+<transform depend pkg.debug.depend.file=libexslt.so.* -> delete pkg.debug.depend.path usr/lib.*>
+<transform depend pkg.debug.depend.file=libxslt.so.* -> delete pkg.debug.depend.path usr/lib.*>
+<transform depend pkg.debug.depend.file=libpcre.so.* -> delete pkg.debug.depend.path usr/lib.*>
+<transform depend pkg.debug.depend.file=libxml2.so.* -> delete pkg.debug.depend.path usr/lib.*>

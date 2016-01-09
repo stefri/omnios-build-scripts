@@ -1,0 +1,4 @@
+<transform depend pkg.debug.depend.file=libz.so -> delete pkg.debug.depend.path usr/lib.*>
+<transform depend pkg.debug.depend.file=liblzma.so -> delete pkg.debug.depend.path usr/lib.*>
+<transform depend pkg.debug.depend.file=libz.so -> delete pkg.debug.depend.path usr/lib/64.*>
+<transform depend pkg.debug.depend.file=liblzma.so -> delete pkg.debug.depend.path usr/lib/64.*>

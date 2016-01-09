@@ -34,7 +34,6 @@ PKG=service/network/nginx
 SUMMARY="Nginx, http server and reverse proxy"
 DESC="Nginx (pronounced engine-x) is a free, open-source, high-performance HTTP server and reverse proxy, as well as an IMAP/POP3 proxy server."
 
-RUN_DEPENDS_IPS="library/libgd pkg:/local/library/zlib pkg:/mawi/library/pcre"
 BUILDARCH=32
 REMOVE_PREVIOUS=true
 
@@ -74,7 +73,6 @@ CONFIGURE_OPTS="
     --with-http_stub_status_module
     --with-mail
     --with-mail_ssl_module"
-#    --with-pcre=/usr/local
 #    --with-google_perftools_module ; requires google perftools library
 
 service_configs() {
