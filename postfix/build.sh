@@ -34,8 +34,6 @@ PKG=service/network/smtp/postfix
 SUMMARY="Postfix Mail Transport Agent"
 DESC="Postfix is a Mail Transport Agent (MTA), this is a very basic configuration only supporting Berkeley DB based configuration"
 
-RUN_DEPENDS_IPS="database/bdb library/libpq5 library/libldap library/security/cyrus-sasl"
-
 BUILDARCH=32
 USER=postfix
 GROUP=postfix
@@ -110,21 +108,6 @@ build
 make_isa_stub
 service_configs
 sendmail_compat
-make_package
-clean_up
-
-# Vim hints
-# vim:ts=4:sw=4:et:
-}
-
-init
-download_source $PROG $PROG $VER
-patch_source
-prep_build
-build
-make_isa_stub
-service_configs
-#sendmail_compat
 make_package
 clean_up
 
