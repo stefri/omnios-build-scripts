@@ -94,10 +94,15 @@ service_configs() {
 
 sendmail_compat() {
     logmsg "Creating symlinks for sendmail compatibility"
+    logcmd mkdir -p $DESTDIR/etc
+    logcmd mkdir -p $DESTDIR/usr/lib
     logcmd mkdir -p $DESTDIR/usr/sbin
-    logcmd ln -s ../local/sbin/sendmail $DESTDIR/usr/sbin/newaliases
+    logcmd mkdir -p $DESTDIR/usr/bin
+    logcmd ln -s ../etc/postfix/aliases $DESTDIR/etc/aliases
+    logcmd ln -s ../local/sbin/sendmail $DESTDIR/usr/lib/sendmail
     logcmd ln -s ../local/sbin/sendmail $DESTDIR/usr/sbin/sendmail
-    logcmd ln -s ../local/sbin/sendmail $DESTDIR/usr/sbin/mailq
+    logcmd ln -s ../local/sbin/sendmail $DESTDIR/usr/sbin/newaliases
+    logcmd ln -s ../local/sbin/sendmail $DESTDIR/usr/bin/mailq
 }
 
 init
@@ -106,8 +111,8 @@ patch_source
 prep_build
 build
 make_isa_stub
-service_configs
 sendmail_compat
+service_configs
 make_package
 clean_up
 
