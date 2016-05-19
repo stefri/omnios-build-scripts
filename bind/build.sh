@@ -28,7 +28,7 @@
 . ../../lib/functions.sh
 
 PROG=bind
-VER=9.10.3
+VER=9.10.3-P4
 PKG=service/network/dns/bind
 SUMMARY="BIND DNS server and tools"
 DESC="$SUMMARY ($VER)"
@@ -43,7 +43,6 @@ CONFIGURE_OPTS="
     --sysconfdir=/etc
     --localstatedir=/var
     --with-libtool
-    --without-openssl
     --disable-static
 "
 
