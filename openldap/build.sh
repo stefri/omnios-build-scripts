@@ -28,7 +28,7 @@
 . ../../lib/functions.sh
 
 PROG=openldap
-VER=2.4.39
+VER=2.4.44
 VERHUMAN=$VER
 PKG=database/ldap/openldap
 SUMMARY="OpenLDAP - LDAP Server, Tools and Libraries"
@@ -49,8 +49,9 @@ CONFIGURE_OPTS="--sysconfdir=/etc
     --with-tls=openssl
     --with-cyrus-sasl
     --enable-aci
-    --enable-bdb
-    --enable-hdb
+    --enable-bdb=mod
+    --enable-hdb=mod
+    --enable-mdb=mod
     --enable-rewrite
     --enable-ldap=yes
     --enable-meta=mod
